@@ -1,0 +1,55 @@
+#!/bin/csh
+# this script is for drawing the synthetic seismograms of x and z components
+#
+rm -f core
+
+# read the data file of seismogram of x-component
+
+start:
+echo 'Input the data file containing the x-component seismogram'
+set ixname = $<
+if ($ixname == "") then
+	goto start
+endif
+
+# draw the x-component seismogram
+
+minmax -M $ixname 
+
+psbasemap -JX9.0/6.5 -R0.0/1.5/0.0/9.0   -B1a5.0f1.0:"Ux  Time (s)":/1a5.0f1.0:"Distance (km)":SWne -X5.0 -Y3.0 -P -K >! wavefig.ps
+
+
+psxy $ixname -JX -R -N -M -X0.0 -Y0.0 -O -K -W >> wavefig.ps
+
+start:
+echo 'Input the data file containing the second x-component seismogram'
+set ixname = $<
+if ($ixname == "") then
+	goto start
+endif
+
+psxy $ixname -JX -R -N -M -X0.0 -Y0.0 -O -K -W/255/0/0 >> wavefig.ps
+
+start:
+echo 'Input the data file containing the z-component seismogram'
+set ixname = $<
+if ($ixname == "") then
+	goto start
+endif
+
+# draw the x-component seismogram
+
+minmax -M $ixname
+
+psxy $ixname -JX -R -B1a5.0f1.0:"Uz  Time (s)":/1a5.0f1.0:"Distance (km)":SWne -N -M -X0.0 -Y9.0 -O -K -W >> wavefig.ps
+
+start:
+echo 'Input the data file containing the second z-component seismogram'
+set ixname = $<
+if ($ixname == "") then
+	goto start
+endif
+
+psxy $ixname -JX -R -N -M -X0.0 -Y0.0 -O -W/255/0/0 >> wavefig.ps
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+rm -f co.grd

@@ -1,0 +1,56 @@
+#!/bin/csh
+# this script is for drawing the images of snapshots
+#
+rm -f core
+
+start:
+echo 'Input the data file containing the P-SV snapshot'
+set isname1 = $<
+if ($isname1 == "") then
+   goto start
+endif
+
+# draw the snapshot image
+
+minmax $isname1"1" 
+
+xyz2grd $isname1"1" -Gsnapps.grd -I0.06/0.06 -R0.0/8.76/0.0/8.76 
+
+grdimage snapps.grd -CGMT_red2green.cpt -JX10/-10 -R -B1a5.0f1.0:"Distance (km)":/1a5.0f1.0:"Depth (km)":WsNe -P -K -X5.0 -Y5.0 >! snapshot1.ps 
+
+minmax $isname1"2" 
+
+xyz2grd $isname1"2" -Gsnapps.grd -I0.06/0.06 -R0.0/8.76/0.0/8.76 
+
+grdimage snapps.grd -CGMT_red2green.cpt -JX10/-10 -R -B1a5.0f1.0:"Distance (km)":/1a5.0f1.0:"Depth (km)":WsNe -P -K -X5.0 -Y5.0 >! snapshot2.ps 
+
+minmax $isname1"3" 
+
+xyz2grd $isname1"3" -Gsnapps.grd -I0.06/0.06 -R0.0/8.76/0.0/8.76 
+
+grdimage snapps.grd -CGMT_red2green.cpt -JX10/-10 -R -B1a5.0f1.0:"Distance (km)":/1a5.0f1.0:"Depth (km)":WsNe -P -K -X5.0 -Y5.0 >! snapshot3.ps 
+
+minmax $isname1"4" 
+
+xyz2grd $isname1"4" -Gsnapps.grd -I0.06/0.06 -R0.0/8.76/0.0/8.76 
+
+grdimage snapps.grd -CGMT_red2green.cpt -JX10/-10 -R -B1a5.0f1.0:"Distance (km)":/1a5.0f1.0:"Depth (km)":WsNe -P -K -X5.0 -Y5.0 >! snapshot4.ps 
+
+minmax $isname1"5" 
+
+xyz2grd $isname1"5" -Gsnapps.grd -I0.06/0.06 -R0.0/8.76/0.0/8.76 
+
+grdimage snapps.grd -CGMT_red2green.cpt -JX10/-10 -R -B1a5.0f1.0:"Distance (km)":/1a5.0f1.0:"Depth (km)":WsNe -P -K -X5.0 -Y5.0 >! snapshot5.ps 
+
+
+rm -f isname1"1"
+rm -f isname1"2"
+rm -f isname1"3"
+rm -f isname1"4"
+rm -f isname1"5"
+rm -f snapps.grd
+rm -f snapps.cpt
+rm -f co.grd
+ 
+
+
